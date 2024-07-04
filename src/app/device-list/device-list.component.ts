@@ -13,28 +13,33 @@ import { NgbdModalContent } from '../bootstrap/modal/modal.component';
   standalone: true,
   imports: [RouterOutlet, AsyncPipe, ReactiveFormsModule, NgbHighlight],
   templateUrl: './device-list.component.html',
-  styleUrl: './device-list.component.scss'
+  styleUrl: './device-list.component.scss',
 })
 export class DevicelistComponent implements OnInit {
-
+  pagename: string = 'world';
   public filteredDevices: Device[] = [];
   public devices: Device[] = [];
   public filter = new FormControl('', { nonNullable: true });
 
-  constructor(private deviceService: DeviceService, private modalService: NgbModal) { }
+  constructor(
+    private deviceService: DeviceService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     combineLatest([
       this.deviceService.getDevices(),
-      this.filter.valueChanges.pipe(startWith(''))
-    ]).pipe(
-      map(([devices, filterText]) => {
-        this.devices = devices;
-        return this.onSearch(filterText);
-      })
-    ).subscribe(filteredDevices => {
-      this.filteredDevices = filteredDevices;
-    });
+      this.filter.valueChanges.pipe(startWith('')),
+    ])
+      .pipe(
+        map(([devices, filterText]) => {
+          this.devices = devices;
+          return this.onSearch(filterText);
+        })
+      )
+      .subscribe((filteredDevices) => {
+        this.filteredDevices = filteredDevices;
+      });
   }
 
   onSearch(text: string): Device[] {
@@ -56,7 +61,7 @@ export class DevicelistComponent implements OnInit {
   }
 
   logDevice(device: Device): void {
-    console.log("LogDevice: ", device);
+    console.log('LogDevice: ', device);
     this.openModal(device);
   }
 
@@ -66,14 +71,12 @@ export class DevicelistComponent implements OnInit {
   }
 
   onEditDevice(device: Device) {
-    console.log("EditDevice: ", device);
+    console.log('EditDevice: ', device);
   }
-
 
   onDeleteDevice(device: Device) {
-    console.log("DeleteDevice: ", device);
-    const updatedDevices = this.devices.filter(d => d.sn !== device.sn);
+    console.log('DeleteDevice: ', device);
+    const updatedDevices = this.devices.filter((d) => d.sn !== device.sn);
     this.deviceService.devices$.next([...updatedDevices]);
   }
-
 }

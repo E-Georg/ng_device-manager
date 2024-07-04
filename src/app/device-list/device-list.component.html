@@ -1,19 +1,26 @@
 <div class="container">
-
-  <div class="row mb-3">
+  <div class="row my-3">
     <div class="col">
-      <h1 class="border-bottom border-primary border-3">Deviceliste</h1>
+      <h1 class="border-bottom border-primary border-3">{{ pagename }}</h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
-
       <form>
         <div class="mb-3 row">
-          <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+          <label
+            for="table-filtering-search"
+            class="col-xs-3 col-sm-auto col-form-label"
+            >Full text search:</label
+          >
           <div class="col-xs-3 col-sm-auto">
-            <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+            <input
+              id="table-filtering-search"
+              class="form-control"
+              type="text"
+              [formControl]="filter"
+            />
           </div>
         </div>
       </form>
@@ -37,35 +44,78 @@
             </tr>
           </thead>
           <tbody>
-            @for (device of filteredDevices; track device.hersteller; let i = $index) {
+            @for (device of filteredDevices; track device.hersteller; let i =
+            $index) {
             <tr>
               <th scope="row">{{ i + 1 }}</th>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.hersteller" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.model" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.beschreibung" [term]="filter.value" />
+              <td (click)="logDevice(device)">
+                <ngb-highlight
+                  [result]="device.hersteller"
+                  [term]="filter.value"
+                />
               </td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.sn" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.kunde" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.einbauort" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.enddeviceid" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.appkey" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.appeui" [term]="filter.value" /></td>
-              <td (click)="logDevice(device)"><ngb-highlight [result]="device.deveui" [term]="filter.value" /></td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight [result]="device.model" [term]="filter.value" />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight
+                  [result]="device.beschreibung"
+                  [term]="filter.value"
+                />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight [result]="device.sn" [term]="filter.value" />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight [result]="device.kunde" [term]="filter.value" />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight
+                  [result]="device.einbauort"
+                  [term]="filter.value"
+                />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight
+                  [result]="device.enddeviceid"
+                  [term]="filter.value"
+                />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight [result]="device.appkey" [term]="filter.value" />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight [result]="device.appeui" [term]="filter.value" />
+              </td>
+              <td (click)="logDevice(device)">
+                <ngb-highlight [result]="device.deveui" [term]="filter.value" />
+              </td>
               <td>
-                <button class="btn btn-secondary me-2" (click)="onEditDevice(device)">Bearbeiten</button>
-                <button class="btn btn-danger" (click)="onDeleteDevice(device)" disabled>Löschen</button>
+                <button
+                  class="btn btn-secondary me-2"
+                  (click)="onEditDevice(device)"
+                >
+                  Bearbeiten
+                </button>
+                <button
+                  class="btn btn-danger"
+                  (click)="onDeleteDevice(device)"
+                  disabled
+                >
+                  Löschen
+                </button>
               </td>
             </tr>
             } @empty {
             <tr>
-              <td colspan="12" style="text-align: center">No countries found</td>
+              <td colspan="12" style="text-align: center">
+                No countries found
+              </td>
             </tr>
             }
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
-
 </div>

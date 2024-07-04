@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col">
+      <h1 class="border-bottom border-primary border-3">Namesgenerator</h1>
+    </div>
+  </div>
+
+  <div class="row text-center mb-3">
+    <div class="col-2 border border-secondary">
+      <div>Kunde</div>
+      <div>ei</div>
+      <div></div>
+    </div>
+
+    <div class="col-2 border border-secondary">
+      <div>Land</div>
+      <div>de</div>
+      <div></div>
+    </div>
+
+    <div class="col-2 border border-secondary">
+      <div>Stadt</div>
+      <div>str</div>
+      <div></div>
+    </div>
+
+    <div class="col-2 border border-secondary">
+      <div>Treiber</div>
+      <div>lw</div>
+      <div></div>
+    </div>
+
+    <div class="col-2 border border-secondary">
+      <div>Gerät</div>
+      <div>sn</div>
+      <div></div>
+    </div>
+
+    <div class="col-2 border border-secondary">
+      <div>Jahr + Nummer</div>
+      <div>b10021</div>
+      <div></div>
+    </div>
+  </div>
+
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="row text-center mb-3">
+      <!-- KUNDE -->
+      <div class="col-2 border border-secondary">
+        <label class="form-label" for="customer">Kunde</label>
+        <select class="form-select" id="customer" formControlName="customer">
+          <option
+            *ngFor="let customer of customers"
+            value="{{ customer.abbr }}"
+          >
+            {{ customer.name }}
+          </option>
+        </select>
+      </div>
+      <!-- LAND -->
+      <div class="col-2 border border-secondary">
+        <label class="form-label" for="country">Land</label>
+        <select class="form-select" id="country" formControlName="country">
+          <option *ngFor="let country of countries" value="{{ country.abbr }}">
+            {{ country.name }}
+          </option>
+        </select>
+      </div>
+      <!-- STADT -->
+      <div class="col-2 border border-secondary">
+        <label class="form-label" for="city">Stadt</label>
+        <select class="form-select" id="city" formControlName="city">
+          <option *ngFor="let city of cities" value="{{ city.abbr }}">
+            {{ city.name }}
+          </option>
+        </select>
+      </div>
+      <!-- TREIBER -->
+      <div class="col-2 border border-secondary">
+        <label class="form-label" for="driver">Treiber</label>
+        <select class="form-select" id="driver" formControlName="driver">
+          <option *ngFor="let driver of drivers" value="{{ driver.abbr }}">
+            {{ driver.name }}
+          </option>
+        </select>
+      </div>
+      <!-- GERÄTETYPE -->
+      <div class="col-2 border border-secondary">
+        <label class="form-label" for="type">Gerätetyp</label>
+        <select class="form-select" id="type" formControlName="type">
+          <option value="sn">Sensor</option>
+          <option value="gw">Gateway</option>
+          <option value="db">Datenbank</option>
+          <option value="md">Mediator</option>
+        </select>
+      </div>
+      <!-- YEAR -->
+      <div class="col-2 border border-secondary">
+        <label class="form-label" for="year">Jahr</label>
+        <select class="form-select" id="year" formControlName="year">
+          <option *ngFor="let year of years" value="{{ year.abbr }}">
+            {{ year.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- BUTTON -->
+      <div class="col">
+        <button
+          type="submit"
+          [disabled]="myForm.invalid"
+          class="btn btn-primary"
+        >
+          Name Generieren
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- AUSGABE DES NEUEN NAMES -->
+  <div class="row">
+    <div class="col">
+      <div>
+        Ausgabe: <span class="text-success">{{ deviceName }}</span>
+      </div>
+    </div>
+  </div>
+</div>
