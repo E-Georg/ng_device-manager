@@ -1,0 +1,212 @@
+<div class="container">
+
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="border-bottom border-primary border-3">Neues Device Anlegen</h1>
+        </div>
+    </div>
+
+    <form (ngSubmit)="onSubmit(successTpl)" [formGroup]="form">
+        <!-- Hersteller -->
+        <div class="row mb-3 g-3 align-items-center">
+            <div class="col-2">
+                <label for="hersteller" class="form-label">Hersteller</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="hersteller" id="hersteller" formControlName="hersteller">
+            </div>
+            <div class="col-auto">
+                @if (form.get('hersteller')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+                @else {
+                <span class="text-danger">
+                    Muss 3-20 zeichen beinhalten.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- Model -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="model" class="form-label">Model</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="model" id="model" formControlName="model">
+            </div>
+            <div class="col-auto">
+                @if (form.get('model')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+                @else {
+                <span class="text-danger">
+                    Muss 3-20 zeichen beinhalten.
+                </span>
+                }
+            </div>
+        </div>
+
+        <!-- Seriennummer -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="sn" class="form-label">Seriennummer</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="sn" id="sn" formControlName="sn">
+            </div>
+            <div class="col-auto">
+                @if (form.get('sn')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+                @else {
+                <span class="text-danger">
+                    Muss 6-32 zeichen beinhalten.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- AppKEY -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="appkey" class="form-label">AppKEY</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="appkey" id="appkey" formControlName="appkey">
+            </div>
+            <div class="col-auto">
+                @if (form.get('appkey')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+                @else {
+                <span class="text-danger">
+                    Muss aus 32 HEX zahlen bestehen.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- AppEUI -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="appeui" class="form-label">AppEUI</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="appeui" id="appeui" formControlName="appeui">
+            </div>
+            <div class="col-auto">
+                @if (form.get('appeui')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+                @else {
+                <span class="text-danger">
+                    Muss aus 16 HEX zahlen bestehen.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- DevEUI -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="deveui" class="form-label">DevEUI</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="deveui" id="deveui" formControlName="deveui">
+            </div>
+            <div class="col-auto">
+                @if (form.get('deveui')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+                @else {
+                <span class="text-danger">
+                    Muss aus 16 HEX zahlen bestehen.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- Optional -->
+        <hr>
+        <!-- End-Device-ID -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="enddeviceid" class="form-label">End-Device-ID</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="enddeviceid" id="enddeviceid"
+                    formControlName="enddeviceid">
+            </div>
+            <div class="col-auto">
+                @if (form.get('enddeviceid')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- Kunde -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="kunde" class="form-label">Kunde</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="kunde" id="kunde" formControlName="kunde">
+            </div>
+            <div class="col-auto">
+                @if (form.get('kunde')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- Einbauort -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="einbauort" class="form-label">Einbauort</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="einbauort" id="einbauort" formControlName="einbauort">
+            </div>
+            <div class="col-auto">
+                @if (form.get('einbauort')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+            </div>
+        </div>
+        <!-- Beschreibung -->
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-2">
+                <label for="beschreibung" class="form-label">Beschreibung</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="beschreibung" id="beschreibung"
+                    formControlName="beschreibung">
+            </div>
+            <div class="col-auto">
+                @if (form.get('beschreibung')?.valid) {
+                <span class="text-success">
+                    O.K.
+                </span>
+                }
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Anlegen</button>
+    </form>
+
+</div>
+
+<ng-template #successTpl> Device wurde angelegt. </ng-template>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

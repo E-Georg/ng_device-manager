@@ -1,0 +1,19 @@
+.overflow {
+    overflow: auto;
+}
+
+td {
+    white-space: nowrap;
+}
+
+tr {
+    cursor: pointer;
+}
+
+tr:hover {
+
+    th,
+    td {
+        color: royalblue;
+    }
+}
