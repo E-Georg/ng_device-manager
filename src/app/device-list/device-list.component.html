@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row my-3">
     <div class="col">
-      <h1 class="border-bottom border-primary border-3">{{ pagename }}</h1>
+      <h1 class="border-bottom border-primary border-3">Deviceliste</h1>
     </div>
   </div>
 
@@ -48,59 +48,60 @@
             $index) {
             <tr>
               <th scope="row">{{ i + 1 }}</th>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight
                   [result]="device.hersteller"
                   [term]="filter.value"
                 />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight [result]="device.model" [term]="filter.value" />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight
                   [result]="device.beschreibung"
                   [term]="filter.value"
                 />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight [result]="device.sn" [term]="filter.value" />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight [result]="device.kunde" [term]="filter.value" />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight
                   [result]="device.einbauort"
                   [term]="filter.value"
                 />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight
                   [result]="device.enddeviceid"
                   [term]="filter.value"
                 />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight [result]="device.appkey" [term]="filter.value" />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight [result]="device.appeui" [term]="filter.value" />
               </td>
-              <td (click)="logDevice(device)">
+              <td (click)="openModal(device)">
                 <ngb-highlight [result]="device.deveui" [term]="filter.value" />
               </td>
               <td>
                 <button
                   class="btn btn-secondary me-2"
                   (click)="onEditDevice(device)"
+                  [disabled]="false"
                 >
                   Bearbeiten
                 </button>
                 <button
                   class="btn btn-danger"
                   (click)="onDeleteDevice(device)"
-                  disabled
+                  [disabled]="false"
                 >
                   Löschen
                 </button>

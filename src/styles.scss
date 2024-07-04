@@ -1,4 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+//   display: block;
+  background-image: url("../public/assets/images/Teams_Hintergrund_hell.png");
+  background-position: right bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 100dvh;
+  // font-family: var(--main-font-family);
+  // color: var(--color-black);
+  &::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}

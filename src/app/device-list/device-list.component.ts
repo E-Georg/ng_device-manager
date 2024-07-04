@@ -16,7 +16,6 @@ import { NgbdModalContent } from '../bootstrap/modal/modal.component';
   styleUrl: './device-list.component.scss',
 })
 export class DevicelistComponent implements OnInit {
-  pagename: string = 'world';
   public filteredDevices: Device[] = [];
   public devices: Device[] = [];
   public filter = new FormControl('', { nonNullable: true });
@@ -62,7 +61,6 @@ export class DevicelistComponent implements OnInit {
 
   logDevice(device: Device): void {
     console.log('LogDevice: ', device);
-    this.openModal(device);
   }
 
   openModal(device: Device): void {

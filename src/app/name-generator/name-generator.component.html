@@ -2,51 +2,21 @@
   <div class="row my-3">
     <div class="col">
       <h1 class="border-bottom border-primary border-3">Namesgenerator</h1>
-    </div>
-  </div>
-
-  <div class="row text-center mb-3">
-    <div class="col-2 border border-secondary">
-      <div>Kunde</div>
-      <div>ei</div>
-      <div></div>
-    </div>
-
-    <div class="col-2 border border-secondary">
-      <div>Land</div>
-      <div>de</div>
-      <div></div>
-    </div>
-
-    <div class="col-2 border border-secondary">
-      <div>Stadt</div>
-      <div>str</div>
-      <div></div>
-    </div>
-
-    <div class="col-2 border border-secondary">
-      <div>Treiber</div>
-      <div>lw</div>
-      <div></div>
-    </div>
-
-    <div class="col-2 border border-secondary">
-      <div>Gerät</div>
-      <div>sn</div>
-      <div></div>
-    </div>
-
-    <div class="col-2 border border-secondary">
-      <div>Jahr + Nummer</div>
-      <div>b10021</div>
-      <div></div>
+      <p>
+        Um einen neuen namen zu generieren bitte alle Felder auswählen,
+        anschließend auf den Butten "Name Generieren" klicken.
+      </p>
+      <p>
+        Der neu erstellte Devicename erscheint um das neue Gerät anlegen zu
+        können.
+      </p>
     </div>
   </div>
 
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="row text-center mb-3">
       <!-- KUNDE -->
-      <div class="col-2 border border-secondary">
+      <div class="col-2">
         <label class="form-label" for="customer">Kunde</label>
         <select class="form-select" id="customer" formControlName="customer">
           <option
@@ -58,7 +28,7 @@
         </select>
       </div>
       <!-- LAND -->
-      <div class="col-2 border border-secondary">
+      <div class="col-2">
         <label class="form-label" for="country">Land</label>
         <select class="form-select" id="country" formControlName="country">
           <option *ngFor="let country of countries" value="{{ country.abbr }}">
@@ -67,7 +37,7 @@
         </select>
       </div>
       <!-- STADT -->
-      <div class="col-2 border border-secondary">
+      <div class="col-2">
         <label class="form-label" for="city">Stadt</label>
         <select class="form-select" id="city" formControlName="city">
           <option *ngFor="let city of cities" value="{{ city.abbr }}">
@@ -76,7 +46,7 @@
         </select>
       </div>
       <!-- TREIBER -->
-      <div class="col-2 border border-secondary">
+      <div class="col-2">
         <label class="form-label" for="driver">Treiber</label>
         <select class="form-select" id="driver" formControlName="driver">
           <option *ngFor="let driver of drivers" value="{{ driver.abbr }}">
@@ -85,17 +55,16 @@
         </select>
       </div>
       <!-- GERÄTETYPE -->
-      <div class="col-2 border border-secondary">
+      <div class="col-2">
         <label class="form-label" for="type">Gerätetyp</label>
         <select class="form-select" id="type" formControlName="type">
-          <option value="sn">Sensor</option>
-          <option value="gw">Gateway</option>
-          <option value="db">Datenbank</option>
-          <option value="md">Mediator</option>
+          <option *ngFor="let type of types" value="{{ type.abbr }}">
+            {{ type.name }}
+          </option>
         </select>
       </div>
       <!-- YEAR -->
-      <div class="col-2 border border-secondary">
+      <div class="col-2">
         <label class="form-label" for="year">Jahr</label>
         <select class="form-select" id="year" formControlName="year">
           <option *ngFor="let year of years" value="{{ year.abbr }}">
@@ -122,8 +91,12 @@
   <!-- AUSGABE DES NEUEN NAMES -->
   <div class="row">
     <div class="col">
-      <div>
-        Ausgabe: <span class="text-success">{{ deviceName }}</span>
+      <div class="fs-5 fw-semibold me-3">Devicename:</div>
+      <div *ngIf="deviceName" class="alert alert-success" role="alert">
+        {{ deviceName }}
+      </div>
+      <div *ngIf="!deviceName" class="alert alert-danger d-none" role="alert">
+        Fehler: Name konnte nicht generiert werden!
       </div>
     </div>
   </div>
