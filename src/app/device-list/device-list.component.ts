@@ -32,7 +32,7 @@ export class DevicelistComponent implements OnInit {
     ])
       .pipe(
         map(([devices, filterText]) => {
-          this.devices = devices;
+          this.devices = devices.devices;
           return this.onSearch(filterText);
         })
       )
@@ -74,7 +74,5 @@ export class DevicelistComponent implements OnInit {
 
   onDeleteDevice(device: Device) {
     console.log('DeleteDevice: ', device);
-    const updatedDevices = this.devices.filter((d) => d.sn !== device.sn);
-    this.deviceService.devices$.next([...updatedDevices]);
   }
 }
