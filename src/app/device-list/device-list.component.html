@@ -44,12 +44,12 @@
             </tr>
           </thead>
           <tbody>
-            @for (device of filteredDevices; track device.id; let i = $index) {
+            @for (device of filteredDevices; track device._id; let i = $index) {
             <tr>
               <th scope="row">{{ i + 1 }}</th>
               <td (click)="openModal(device)">
                 <ngb-highlight
-                  [result]="device.hersteller"
+                  [result]="device.manufacturer"
                   [term]="filter.value"
                 />
               </td>
@@ -58,25 +58,31 @@
               </td>
               <td (click)="openModal(device)">
                 <ngb-highlight
-                  [result]="device.beschreibung"
-                  [term]="filter.value"
-                />
-              </td>
-              <td (click)="openModal(device)">
-                <ngb-highlight [result]="device.sn" [term]="filter.value" />
-              </td>
-              <td (click)="openModal(device)">
-                <ngb-highlight [result]="device.kunde" [term]="filter.value" />
-              </td>
-              <td (click)="openModal(device)">
-                <ngb-highlight
-                  [result]="device.einbauort"
+                  [result]="device.description"
                   [term]="filter.value"
                 />
               </td>
               <td (click)="openModal(device)">
                 <ngb-highlight
-                  [result]="device.enddeviceid"
+                  [result]="device.serialNumber"
+                  [term]="filter.value"
+                />
+              </td>
+              <td (click)="openModal(device)">
+                <ngb-highlight
+                  [result]="device.customer"
+                  [term]="filter.value"
+                />
+              </td>
+              <td (click)="openModal(device)">
+                <ngb-highlight
+                  [result]="device.location"
+                  [term]="filter.value"
+                />
+              </td>
+              <td (click)="openModal(device)">
+                <ngb-highlight
+                  [result]="device.endDeviceId"
                   [term]="filter.value"
                 />
               </td>
@@ -93,7 +99,7 @@
                 <button
                   class="btn btn-secondary me-2"
                   (click)="onEditDevice(device)"
-                  [disabled]="false"
+                  [disabled]="true"
                 >
                   Bearbeiten
                 </button>
@@ -108,9 +114,7 @@
             </tr>
             } @empty {
             <tr>
-              <td colspan="12" style="text-align: center">
-                No countries found
-              </td>
+              <td colspan="12" style="text-align: center">No devices found</td>
             </tr>
             }
           </tbody>

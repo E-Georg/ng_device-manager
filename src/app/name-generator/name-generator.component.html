@@ -82,22 +82,59 @@
           [disabled]="myForm.invalid"
           class="btn btn-primary"
         >
-          Name Generieren
+          EndDeviceID generieren
         </button>
       </div>
     </div>
   </form>
 
-  <!-- AUSGABE DES NEUEN NAMES -->
+  <!-- EndDeviceId Modal -->
+
   <div class="row">
     <div class="col">
-      <div class="fs-5 fw-semibold me-3">Devicename:</div>
-      <div *ngIf="deviceName" class="alert alert-success" role="alert">
-        {{ deviceName }}
-      </div>
-      <div *ngIf="!deviceName" class="alert alert-danger d-none" role="alert">
-        Fehler: Name konnte nicht generiert werden!
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">EndDeviceID's</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>
+              <div class="d-flex justify-content-between align-items-center">
+                <span>ei-de-dd-lw-sn-b10001</span>
+                <button class="btn btn-sm btn-outline-danger" type="button">
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>
+              <div class="d-flex justify-content-between align-items-center">
+                <span>ei-de-dd-lw-sn-b10002</span>
+                <button class="btn btn-sm btn-outline-danger" type="button">
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>
+              <div class="d-flex justify-content-between align-items-center">
+                <span>ei-de-dd-lw-sn-b10003</span>
+                <button class="btn btn-sm btn-outline-danger" type="button">
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

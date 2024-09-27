@@ -12,11 +12,7 @@ export class TabelService {
     },
     {
       name: 'BACnet',
-      abbr: 'bn',
-    },
-    {
-      name: 'HTTP',
-      abbr: 'http',
+      abbr: 'bacnet',
     },
     {
       name: 'KNX',
@@ -24,23 +20,35 @@ export class TabelService {
     },
     {
       name: 'Mbus',
-      abbr: 'mb',
+      abbr: 'mbus',
     },
     {
       name: 'MQTT',
       abbr: 'mqtt',
     },
     {
-      name: 'ModBus',
-      abbr: 'mb',
+      name: 'Modbus-TCP',
+      abbr: 'modbus',
     },
     {
       name: 'OPC-UA',
-      abbr: 'opc',
+      abbr: 'opcua',
     },
     {
       name: 'SNMP',
       abbr: 'snmp',
+    },
+    {
+      name: '(S)FTP-CSV',
+      abbr: 'sftp',
+    },
+    {
+      name: 'HTTP-CSV',
+      abbr: 'http',
+    },
+    {
+      name: 'SQL-Datenbank',
+      abbr: 'sql',
     },
   ];
 
@@ -74,6 +82,14 @@ export class TabelService {
     {
       name: 'Wetterstation',
       abbr: 'ws',
+    },
+    {
+      name: 'Wohnungsgenossenschaft "Glückauf"',
+      abbr: 'wga',
+    },
+    {
+      name: 'UVEX',
+      abbr: 'ux',
     },
   ];
 
@@ -161,6 +177,10 @@ export class TabelService {
       name: 'Bayreuth',
       abbr: 'bt',
     },
+    {
+      name: 'Frankfurt',
+      abbr: 'f',
+    },
   ];
 
   countries = [
@@ -196,7 +216,7 @@ export class TabelService {
       abbr: 'gw',
     },
     {
-      name: 'Dtenbank',
+      name: 'Datenbank',
       abbr: 'db',
     },
     {
@@ -205,12 +225,12 @@ export class TabelService {
     },
   ];
 
-  drivers$ = new BehaviorSubject(this.drivers);
   customers$ = new BehaviorSubject(this.customers);
-  cities$ = new BehaviorSubject(this.cities);
-  years$ = new BehaviorSubject(this.years);
   countries$ = new BehaviorSubject(this.countries);
+  cities$ = new BehaviorSubject(this.cities);
+  drivers$ = new BehaviorSubject(this.drivers);
   types$ = new BehaviorSubject(this.types);
+  years$ = new BehaviorSubject(this.years);
 
   getCustomers() {
     return this.customers$.asObservable();

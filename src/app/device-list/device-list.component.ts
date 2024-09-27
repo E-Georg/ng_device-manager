@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { startWith, map, combineLatest } from 'rxjs';
-import { Device } from '../interfaces/device';
-import { DeviceService } from '../service/device.service';
 import { AsyncPipe } from '@angular/common';
+import { Component, type OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { NgbHighlight, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdModalContent } from '../bootstrap/modal/modal.component';
+import { combineLatest, map, startWith } from 'rxjs';
+import { NgbdDeviceModalContent } from '../bootstrap/modal/device-modal.component';
+import type { Device } from '../interfaces/device';
+import { DeviceService } from '../service/device.service';
 
 @Component({
   selector: 'app-devicelist',
@@ -45,13 +45,13 @@ export class DevicelistComponent implements OnInit {
     return this.devices.filter((device) => {
       const term = text.toLowerCase();
       return (
-        device.hersteller.toLowerCase().includes(term) ||
+        device.manufacturer.toLowerCase().includes(term) ||
         device.model.toLowerCase().includes(term) ||
-        device.beschreibung.toLowerCase().includes(term) ||
-        device.sn.toLowerCase().includes(term) ||
-        device.kunde.toLowerCase().includes(term) ||
-        device.einbauort.toLowerCase().includes(term) ||
-        device.enddeviceid.toLowerCase().includes(term) ||
+        device.description.toLowerCase().includes(term) ||
+        device.serialNumber.toLowerCase().includes(term) ||
+        device.customer.toLowerCase().includes(term) ||
+        device.location.toLowerCase().includes(term) ||
+        device.endDeviceId.toLowerCase().includes(term) ||
         device.appkey.toLowerCase().includes(term) ||
         device.appeui.toLowerCase().includes(term) ||
         device.deveui.toLowerCase().includes(term)
@@ -64,15 +64,16 @@ export class DevicelistComponent implements OnInit {
   }
 
   openModal(device: Device): void {
-    const modalRef = this.modalService.open(NgbdModalContent);
+    const modalRef = this.modalService.open(NgbdDeviceModalContent);
     modalRef.componentInstance.device = device;
   }
 
   onEditDevice(device: Device) {
-    console.log('EditDevice: ', device);
+    console.log('EditDevice: ', device._id);
   }
 
   onDeleteDevice(device: Device) {
     console.log('DeleteDevice: ', device);
+    this.deviceService.deleteDevice(device._id);
   }
 }

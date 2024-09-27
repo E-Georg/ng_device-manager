@@ -1,4 +1,9 @@
-import { Component, OnInit, TemplateRef, inject } from '@angular/core';
+import {
+  Component,
+  type OnInit,
+  type TemplateRef,
+  inject,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,8 +12,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsContainer } from '../bootstrap/toast/toasts-container.cpmonent';
 import { ToastService } from '../bootstrap/toast/toast.service';
+import { ToastsContainer } from '../bootstrap/toast/toasts-container.component';
 import { DeviceService } from '../service/device.service';
 
 @Component({
@@ -30,7 +35,7 @@ export class DeviceCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      hersteller: new FormControl(null, {
+      manufacturer: new FormControl(null, {
         validators: [
           Validators.required,
           Validators.minLength(3),
@@ -44,7 +49,7 @@ export class DeviceCreateComponent implements OnInit {
           Validators.maxLength(20),
         ],
       }),
-      sn: new FormControl(null, {
+      serialNumber: new FormControl(null, {
         validators: [
           Validators.required,
           Validators.minLength(6),
@@ -70,10 +75,10 @@ export class DeviceCreateComponent implements OnInit {
         ],
       }), //HEX zahlen
       // Optional
-      enddeviceid: new FormControl(''),
-      beschreibung: new FormControl(''),
-      kunde: new FormControl(''),
-      einbauort: new FormControl(''),
+      endDeviceId: new FormControl(''),
+      customer: new FormControl(''),
+      location: new FormControl(''),
+      description: new FormControl(''),
     });
   }
 
@@ -82,14 +87,22 @@ export class DeviceCreateComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
-    // Build JSON
-    console.log('Form: ', this.form.value);
-
     // Neues Device erstellen
-
+    const newDevice = {
+      _id: '',
+      manufacturer: this.form.value.manufacturer,
+      model: this.form.value.model,
+      serialNumber: this.form.value.serialNumber,
+      appkey: this.form.value.appkey,
+      appeui: this.form.value.appeui,
+      deveui: this.form.value.deveui,
+      endDeviceId: this.form.value.endDeviceId,
+      customer: this.form.value.customer,
+      location: this.form.value.location,
+      description: this.form.value.description,
+    };
     // Device hinzufügen
-    this.deviceService.addDevice(this.form.value);
+    this.deviceService.addDevice(newDevice);
     // Show Toast
     this.showSuccess(template);
     // Rest Form

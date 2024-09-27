@@ -1,13 +1,13 @@
 export interface Device {
-  hersteller: string;
+  _id: string;
+  manufacturer: string;
   model: string;
-  sn: string;
+  serialNumber: string;
   appkey: string;
   appeui: string;
   deveui: string;
-  id: string;
-  enddeviceid: string;
-  kunde: string;
-  einbauort: string;
-  beschreibung: string;
+  endDeviceId: string;
+  customer: string;
+  location: string;
+  description: string;
 }

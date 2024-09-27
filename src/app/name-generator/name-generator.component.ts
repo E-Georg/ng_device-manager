@@ -7,7 +7,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdEndDeviceIdModalContent } from '../bootstrap/modal/enddeviceid-modal.component';
+import { NgbdErrorModalContent } from '../bootstrap/modal/error-modal.component';
+import { EndDeviceIdService } from '../service/end-device-id.service';
+import { EndDeviceIdRequestData } from '../interfaces/end-device-id-request-data';
+import { EndDeviceId } from '../interfaces/end-device-id';
 
 @Component({
   selector: 'app-name-generator',
@@ -36,9 +42,13 @@ export class NameGeneratorComponent
   types: any[] = [];
   years: any[] = [];
 
-  counters: number[] = [10_000];
+  counters: number[] = [10_001];
 
-  constructor(private tableService: TabelService) {}
+  constructor(
+    private tableService: TabelService,
+    private endDeviceIdService: EndDeviceIdService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.getCustomers();
@@ -58,9 +68,7 @@ export class NameGeneratorComponent
     });
   }
 
-  ngAfterViewInit(): void {
-    this.deviceName;
-  }
+  ngAfterViewInit(): void {}
 
   getLastCount() {
     const lastCount = this.counters[this.counters.length - 1];
@@ -95,41 +103,53 @@ export class NameGeneratorComponent
       let newName = `${customer}-${country}-${city}-${driver}-${type}-${year}${newCounter}`;
       return newName;
     } else {
-      console.warn('Es konnte kein neuer name erstellt werden!');
-      return null;
+      const error = 'Es konnte kein neuer name erstellt werden!';
+      console.warn(error);
+      throw new Error(error);
     }
   }
 
-  renderName(name: string) {
-    this.deviceName = name;
-  }
+  // placholder() {
+  // name generieren macht jetzt die API
+  //   const newEndDeviceId: string = this.generateName(
+  //     value.customer,
+  //     value.country,
+  //     value.city,
+  //     value.driver,
+  //     value.type,
+  //     value.year
+  //   );
+  // }
 
   onSubmit() {
-    // valide?
     if (this.myForm.invalid) {
       return;
     }
-    let value = this.myForm.value;
-    console.log('myFrom: ', this.myForm.value);
+    let value: EndDeviceIdRequestData = this.myForm.value;
 
-    // name generieren
-    let name = this.generateName(
-      value.customer,
-      value.country,
-      value.city,
-      value.driver,
-      value.type,
-      value.year
-    );
+    // API anfragen
+    this.endDeviceIdService.checkEndDeviceId(value).subscribe((response) => {
+      console.log('Server response', response);
 
-    console.log('name: ', name);
-    if (name) {
-      this.renderName(name);
-    }
-    // name speichern
+      if (response) {
+        this.openEndDeviceIdModal(response);
+      } else {
+        const error = new Error('Ich mach nix mehr');
+        this.openErrorModal(error);
+      }
+    });
 
     // form reseten
     this.myForm.reset();
+  }
+
+  openEndDeviceIdModal(newEndDeviceId: EndDeviceId): void {
+    const modalRef = this.modalService.open(NgbdEndDeviceIdModalContent);
+    modalRef.componentInstance.endDeviceIdData = newEndDeviceId;
+  }
+  openErrorModal(error: Error): void {
+    const modalRef = this.modalService.open(NgbdErrorModalContent);
+    modalRef.componentInstance.errMessage = error;
   }
 
   getCustomers() {
