@@ -100,34 +100,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
+          <tr
+            *ngFor="
+              let endDeviceId of endDeviceIdList.slice().reverse();
+              let i = index
+            "
+          >
+            <th scope="row">{{ endDeviceIdList.length - i }}</th>
             <td>
               <div class="d-flex justify-content-between align-items-center">
-                <span>ei-de-dd-lw-sn-b10001</span>
-                <button class="btn btn-sm btn-outline-danger" type="button">
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>
-              <div class="d-flex justify-content-between align-items-center">
-                <span>ei-de-dd-lw-sn-b10002</span>
-                <button class="btn btn-sm btn-outline-danger" type="button">
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>
-              <div class="d-flex justify-content-between align-items-center">
-                <span>ei-de-dd-lw-sn-b10003</span>
-                <button class="btn btn-sm btn-outline-danger" type="button">
+                <span>{{ endDeviceId.endDeviceId }}</span>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  type="button"
+                  (click)="handleDeleteEndDeviceId(endDeviceId._id)"
+                >
                   Delete
                 </button>
               </div>

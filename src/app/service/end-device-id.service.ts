@@ -6,8 +6,7 @@ import { EndDeviceIdRequestData } from '../interfaces/end-device-id-request-data
 import { Observable } from 'rxjs';
 
 const API_URL: string = 'http://localhost:3000/api';
-const API_PATH: string = '/enddevices/check';
-const API_PATH2: string = '/enddevices';
+const API_PATH: string = '/enddevices';
 
 @Injectable({
   providedIn: 'root',
@@ -17,25 +16,19 @@ export class EndDeviceIdService {
 
   checkEndDeviceId(endDeviceIdRequestData: EndDeviceIdRequestData) {
     return this.httpClient.post<any>(
-      API_URL + API_PATH,
+      API_URL + API_PATH + '/check',
       endDeviceIdRequestData
     );
   }
 
-  getEndDeviceIds() {
-    return this.httpClient.get<{ message: string; endDeviceId: EndDeviceId[] }>(
-      // environment.apiUrl + query
-      API_URL + API_PATH2
-    );
+  getAllEndDeviceIds() {
+    return this.httpClient.get<EndDeviceId[]>(API_URL + API_PATH);
   }
 
   // POST
   createEndDeviceId(endDeviceId: EndDeviceId) {
     this.httpClient
-      .post<{ message: string; endDeviceId: EndDeviceId }>(
-        API_URL + API_PATH2,
-        endDeviceId
-      )
+      .post<{ endDeviceId: EndDeviceId }>(API_URL + API_PATH, endDeviceId)
       .subscribe((responseData) => {
         console.log('createEndDeviceIdresponse', responseData);
         this.router.navigate(['/generator']);

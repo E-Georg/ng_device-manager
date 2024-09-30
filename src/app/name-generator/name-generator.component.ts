@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { TabelService } from '../service/tabel.service';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -18,7 +18,7 @@ import { EndDeviceId } from '../interfaces/end-device-id';
 @Component({
   selector: 'app-name-generator',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, AsyncPipe],
   templateUrl: './name-generator.component.html',
   styleUrl: './name-generator.component.scss',
 })
@@ -34,6 +34,7 @@ export class NameGeneratorComponent
   driversSub$!: Subscription;
   typesSub$!: Subscription;
   yearsSub$!: Subscription;
+  endDeviceIdListSub$!: Subscription;
 
   customers: any[] = [];
   countries: any[] = [];
@@ -41,6 +42,7 @@ export class NameGeneratorComponent
   drivers: any[] = [];
   types: any[] = [];
   years: any[] = [];
+  endDeviceIdList: EndDeviceId[] = [];
 
   counters: number[] = [10_001];
 
@@ -51,6 +53,7 @@ export class NameGeneratorComponent
   ) {}
 
   ngOnInit(): void {
+    this.handleLoadAllEndDeviceIds();
     this.getCustomers();
     this.getCountries();
     this.getCities();
@@ -68,7 +71,9 @@ export class NameGeneratorComponent
     });
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.handleLoadAllEndDeviceIds();
+  }
 
   getLastCount() {
     const lastCount = this.counters[this.counters.length - 1];
@@ -97,7 +102,7 @@ export class NameGeneratorComponent
     driver: string,
     type: string,
     year: string
-  ) {
+  ): string {
     let newCounter = this.eraseCounter();
     if (newCounter) {
       let newName = `${customer}-${country}-${city}-${driver}-${type}-${year}${newCounter}`;
@@ -108,18 +113,6 @@ export class NameGeneratorComponent
       throw new Error(error);
     }
   }
-
-  // placholder() {
-  // name generieren macht jetzt die API
-  //   const newEndDeviceId: string = this.generateName(
-  //     value.customer,
-  //     value.country,
-  //     value.city,
-  //     value.driver,
-  //     value.type,
-  //     value.year
-  //   );
-  // }
 
   onSubmit() {
     if (this.myForm.invalid) {
@@ -188,6 +181,17 @@ export class NameGeneratorComponent
       .subscribe((years) => (this.years = years));
   }
 
+  handleLoadAllEndDeviceIds() {
+    this.endDeviceIdService.getAllEndDeviceIds().subscribe((result) => {
+      this.endDeviceIdList = result;
+      console.log('AllIds', result);
+    });
+  }
+
+  handleDeleteEndDeviceId(_id: string) {
+    console.log(`Later it will be delete the EndDeviceId: ${_id}`);
+  }
+
   ngOnDestroy(): void {
     if (
       this.customersSub$ ||
@@ -195,7 +199,8 @@ export class NameGeneratorComponent
       this.citiesSub$ ||
       this.driversSub$ ||
       this.typesSub$ ||
-      this.yearsSub$
+      this.yearsSub$ ||
+      this.endDeviceIdListSub$
     ) {
       this.countriesSub$.unsubscribe();
       this.customersSub$.unsubscribe();
@@ -203,6 +208,7 @@ export class NameGeneratorComponent
       this.driversSub$.unsubscribe();
       this.typesSub$.unsubscribe();
       this.yearsSub$.unsubscribe();
+      this.endDeviceIdListSub$.unsubscribe();
     }
   }
 }
